@@ -1,0 +1,98 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+Vagrant.configure(2) do |config|
+
+	config.vm.define 'node205' do |node|
+                node.vm.box = "java8"
+                node.vm.network "private_network", ip: "192.168.56.205"
+                node.vm.hostname = "node205"
+                node.vm.provision :chef_solo do |chef|
+                        chef.add_recipe "base::master"
+			chef.add_recipe "base::namenode"
+                end
+        end
+
+        config.vm.define 'node206' do |node|
+                node.vm.box = "java8"
+                node.vm.network "private_network", ip: "192.168.56.206"
+                node.vm.hostname = "node206"
+                node.vm.provision :chef_solo do |chef|
+                        chef.add_recipe "base::slave"
+			chef.add_recipe "base::zookeeper"
+                        chef.add_recipe "base::datanode"
+                        chef.add_recipe "base::secondarynamenode"
+                        chef.add_recipe "base::mapreduce"
+                        chef.add_recipe "base::resourcemanager"
+                        chef.add_recipe "base::nodemanager"
+                        chef.add_recipe "base::jobhistory"
+                        chef.add_recipe "base::proxyserver"
+			#chef.add_recipe "base::hbase"
+			#chef.add_recipe "base::hbasemaster"
+			chef.add_recipe "base::kafka"
+			chef.add_recipe "base::storm"
+                end
+        end
+
+	config.vm.define 'node207' do |node|
+		node.vm.box = "java8"
+		node.vm.network "private_network", ip: "192.168.56.207"
+                node.vm.hostname = "node207"
+                node.vm.provision :chef_solo do |chef|
+                        chef.add_recipe "base::slave"
+			chef.add_recipe "base::zookeeper"
+                        chef.add_recipe "base::mapreduce"
+			chef.add_recipe "base::client"
+			#chef.add_recipe "base::hbaseregionserver"
+                        #chef.add_recipe "base::flume"
+                        #chef.add_recipe "base::hive2"
+                        #chef.add_recipe "base::pig"
+			#chef.add_recipe "base::solr"
+			#chef.add_recipe "base::hbase-solr"
+			chef.add_recipe "base::kafka"
+			chef.add_recipe "base::storm"
+			chef.add_recipe "base::stormmaster"
+			chef.add_recipe "base::stormworker"
+                end
+	end
+
+	config.vm.define 'node208' do |node|
+                node.vm.box = "java8"
+                node.vm.network "private_network", ip: "192.168.56.208"
+                node.vm.hostname = "node208"
+                node.vm.provision :chef_solo do |chef|
+                        chef.add_recipe "base::slave"
+			chef.add_recipe "base::zookeeper"
+                        chef.add_recipe "base::mapreduce"
+                        chef.add_recipe "base::client"
+                        #chef.add_recipe "base::hbaseregionserver"
+                        #chef.add_recipe "base::flume"
+                        #chef.add_recipe "base::hive2"
+                        #chef.add_recipe "base::pig"
+                        #chef.add_recipe "base::solr"
+                        #chef.add_recipe "base::hbase-solr"
+                        chef.add_recipe "base::kafka"
+                        chef.add_recipe "base::storm"
+                end
+        end
+
+	config.vm.define 'node209' do |node|
+                node.vm.box = "java8"
+                node.vm.network "private_network", ip: "192.168.56.209"
+                node.vm.hostname = "node209"
+                node.vm.provision :chef_solo do |chef|
+                        chef.add_recipe "base::slave"
+                        chef.add_recipe "base::mapreduce"
+                        chef.add_recipe "base::client"
+                        #chef.add_recipe "base::elasticsearch"
+                        #chef.add_recipe "base::logstash"
+                        #chef.add_recipe "base::kibana"
+                        #chef.add_recipe "base::eshadoop"
+			chef.add_recipe "base::hive2"			
+                end
+        end
+end

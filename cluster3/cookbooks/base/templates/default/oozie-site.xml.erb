@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+
+<property>
+	<name>oozie.service.JPAService.jdbc.driver</name>
+        <value>com.mysql.jdbc.Driver</value>
+</property>
+<property>
+        <name>oozie.service.JPAService.jdbc.url</name>
+        <value>jdbc:mysql://localhost:3306/oozie</value>
+</property>
+<property>
+        <name>oozie.service.JPAService.jdbc.username</name>
+        <value>oozie</value>
+</property>
+<property>
+        <name>oozie.service.JPAService.jdbc.password</name>
+        <value>oozie</value>
+</property>
+<property>
+    	<name>hadoop.proxyuser.oozie.hosts</name>
+    	<value>*</value>
+</property>
+<property>
+    	<name>hadoop.proxyuser.oozie.groups</name>
+    	<value>*</value>
+</property>
+
+</configuration>
